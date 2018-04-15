@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 template<typename T>
 struct NODE{
@@ -8,15 +7,17 @@ struct NODE{
 };
 
 template<typename T>
-class simpleLL{
+class simpleLL {
 	public:
 		void insert(const T& item);
 		void print() const;
 		bool search(const T& item) const;
 		void destroy();
-		simpleLL();
-		~simpleLL();
-
+		simpleLL<T>(){
+			count = 0;
+			first = NULL;
+			last = NULL;
+		};
 	private:
 		NODE<T>* first;
 		NODE<T>* last;
@@ -24,23 +25,47 @@ class simpleLL{
 };
 
 template<typename T>
-simpleLL::simpleLL(){
-	count = 0;
-	first = NULL;
-	last = NULL;
-}
-void simpleLL::insert(){
-	T entry;
-	cout << "Entry: ";
-	cin >> entry;
-	if(count == 0){
-		newnode = new NODE;
-		head = newnode;
-		current = head;
+void simpleLL<T>::insert(const T& item){
+	NODE<T> *newnode = new NODE<T>;
+	newnode->data = item;
+	newnode->link = NULL;
 
-		current->link = NULL;
-		current->id = sId;
-		current->name = sName;
-		current->gpa = sGpa;
+	if(count == 0){
+		first = newnode;
+		last = first;
+	} else{
+		last->link = newnode;
+		last = newnode;
 	}
+	count++;
+}
+template<typename T>
+void simpleLL<T>::print() const{
+	NODE<T>* temp = first;
+	while(temp != NULL){
+		std::cout << temp->data << std::endl;
+		temp = temp->link;
+	}
+}
+template<typename T>
+bool simpleLL<T>::search(const T& item) const{
+	NODE<T>* temp = first;
+	while(temp != NULL){
+		if(temp->data == item){
+			return true;
+		}
+		temp = temp->link;
+	}
+	return false;
+}
+template<typename T>
+void simpleLL<T>::destroy(){
+	NODE<T>* temp = first;
+	NODE<T>* current;
+	while(temp != NULL){
+		current = temp;
+		temp = temp->link;
+		delete current;
+	}
+	delete temp;
 }

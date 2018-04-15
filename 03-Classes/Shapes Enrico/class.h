@@ -4,50 +4,43 @@ using namespace std;
 class Shape {
 	public:
 		// Calculate Function
-		int calcArea();
+		int calcArea(){
+			return width * height;
+		}
 
 		// Set Functions
-		void setWidth(int w);
-		void setHeight(int h);
+		void setWidth(int w){
+			width = w;
+		}
+		void setHeight(int h){
+			height = h;
+		}
 
 		// Get Functions
-		int getWidth();
-		int getHeight();
+		int getWidth(){
+			return width;
+		}
+		int getHeight(){
+			return height;
+		}
 
 	private:
 		int width;
 		int height;
 };
-int Shape::calcArea(){
-	return width * height;
-}
-void Shape::setWidth(int w){
-	width = w;
-}
-void Shape::setHeight(int h){
-	height = h;
-}
-int Shape::getWidth(){
-	return width;
-}
-int Shape::getHeight(){
-	return height;
-}
 
 // Triangle Class
 class Triangle: public Shape{
 	public:
-		double calcArea();
+		double calcArea(){
+			return getWidth() * getHeight() / 2;
+		}
 };
-double Triangle::calcArea(){
-	return getWidth() * getHeight() / 2;
-}
 
 // Square Class
 class Square: public Shape{
 	public:
-		double calcArea();
+		double calcArea(){
+			return getWidth() * getWidth();
+		}
 };
-double Square::calcArea(){
-	return getWidth() * getWidth();
-}

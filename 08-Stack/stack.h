@@ -46,5 +46,4 @@ class Stack{
 				temp = temp->next;
 			}
 		}
-		
 };
